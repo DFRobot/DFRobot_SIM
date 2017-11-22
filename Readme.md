@@ -13,12 +13,12 @@ Provides an Arduino library for GSM Shield
 ## Summary
 
 The library use for GSM Shield as following function
-### Make phone call
-### Send short message
-### As a web client
-### Get time
-### Get current position    (L218)
-### Independent file system (L218)
+#### Make phone call
+#### Send short message
+#### As a web client
+#### Get time
+#### Get current position    (L218)
+#### Independent file system (L218)
 
 ## Methods
 ```C++
