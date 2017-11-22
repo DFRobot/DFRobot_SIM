@@ -1,3 +1,24 @@
+# DFROBOT_SIM Library for Arduino
+Provides an Arduino library for GSM Shield
+
+## Table of Contents
+
+* [Summary](#summary)
+* [Methods](#methods)
+* [History](#history)
+* [Credits](#credits)
+<snippet>
+<content>
+
+## Summary
+
+The library use for GSM Shield as following function
+Make phone call
+Send short message
+As a web client
+Get time
+Get current position    (L218)
+Independent file system (L218)
 
 ## Methods
 ```C++
@@ -238,3 +259,12 @@ bool deleteFolder(char *foldername);
 bool writeFile(char *filename, char *data);
 
 ```
+
+## History
+
+- data 2017-11-22
+- version V0.1
+
+## Credits
+
+- author [Zhangjiawei  <jiawei.zhang@dfrobot.com>]
