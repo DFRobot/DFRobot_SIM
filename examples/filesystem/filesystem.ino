@@ -71,8 +71,10 @@ void loop(){
                 Serial.println("Fail to write file");
             }
         }else{
-             Serial.println("Fail to create file");
+            Serial.println("Fail to create file");
         }
+    }else{
+        Serial.println("Fail to create folder");
     }
     while(1);
 }
