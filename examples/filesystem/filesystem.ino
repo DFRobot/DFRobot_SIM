@@ -1,34 +1,34 @@
  /*
-  * file file.ino
+  * file filesystem.ino
   * brief DFRobot's SIM module
   * This example use for L218 file system
+  * After initialization is completed it will list all files and create folder, create file in new folder, write data to new file
+  * Read data from new file then delete new file and folder.It will show ever step result.
   */
 
 #include <Wire.h>
 #include <DFRobot_SIM.h>
 
-SoftwareSerial   mySerial(8,7);
-DFSIM            SIM;
+SoftwareSerial   mySerial(8,7);                                      //RX TX
+DFSIM            sim;
 DFSIMFile        simF;
 
 void setup(){
     Serial.begin(115200);
     sim.begin(mySerial);                                             //Set SoftwareSerial
     Serial.println("L218 file system");
+    Serial.println("Init file system......");
     bool Connected = false;
     while(!Connected){
-        if(sim.init()){                                              //Check and init SIMcard
+        if(simF.init()){                                             //Init file system
             Connected = true;
         }else{
-            Serial.println("Not connected");
+            Serial.println("Fail to init file syste");
+            delay(1000);
         }
     }
-    Serial.println("SIM initialized.");
-    if(simF.init()){                                                 //Init file system
-        Serial.println("File system init");
-    }else{
-        Serial.println("Fail to init file system");
-    }
+    Serial.println("File system initialized");
+
 }
 
 void loop(){

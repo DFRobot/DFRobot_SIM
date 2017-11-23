@@ -2,12 +2,13 @@
   * file client.ino
   * brief DFRobot's SIM module
   * This example use for connect net and send data
+  * After initialization is completed input Server IP if connected input ur data
   */
 
 #include <Wire.h>
 #include <DFRobot_SIM.h>
 
-SoftwareSerial mySerial(8,7);
+SoftwareSerial mySerial(8,7);                                //RX TX
 DFSIM            sim;
 DFSIMClient      simC;
 
@@ -16,6 +17,7 @@ void setup(){
     Serial.begin(115200);
     sim.begin(mySerial);                                     //Set SoftwareSerial
     Serial.println("SIM Client");
+    Serial.println("Check and init SIMcard......");
     bool Connected = false;
     while(!Connected){
         if(sim.init()){                                      //Check and init SIMcard
@@ -25,17 +27,27 @@ void setup(){
         }
     }
     Serial.println("SIM initialized.");
-    signalQuality = simC.checkSignalQuality();               //Check signal quality
-    if(signalQuality){
-        Serial.print("Signal Quality = ");
-        Serial.println(signalQuality);
-    }else{
-        Serial.println("No Signal ! ");
+    Connected = false;
+    while(!Connected){
+        signalQuality = simC.checkSignalQuality();           //Check signal quality
+        if(signalQuality){
+            Serial.print("Signal Quality = ");
+            Serial.println(signalQuality);
+            Connected = true;
+        }else{
+            Serial.println("No Signal ! ");
+            delay(500);
+        }
     }
-    if(simC.init()){                                         //Init web module
-        Serial.println("Init connect server");
-    }else{
-        Serial.println("Failed to init connect server");
+    Connected = false;
+    while(!Connected){
+        if(simC.init()){                                     //Init web module
+            Serial.println("Init connect server");
+            Connected = true;
+        }else{
+            Serial.println("Failed to init connect server");
+            delay(500);
+        }
     }
 }
 
@@ -47,7 +59,7 @@ void loop(){
     readSerial(serverIP);
     Serial.print("Connect to :");
     Serial.println(serverIP);
-    if(simC.connect(serverIP, 80)){                          //Connect to server
+    if(simC.connect(serverIP, TCP, 80)){                     //Connect to server
         Serial.println("Connected!");
         Serial.println("Input data:");
         readSerial(sendData);
@@ -73,7 +85,7 @@ void loop(){
     }
 }
 
-int readSerial(char result[]) {
+int readSerial(char result[]){
     int i = 0;
     while(1){
         while(Serial.available() > 0){

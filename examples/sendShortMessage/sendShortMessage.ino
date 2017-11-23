@@ -2,12 +2,13 @@
   * file sendShortMessage.ino
   * brief DFRobot's SIM module
   * This example use for send short message
+  * After initialization is completed ennter a phone number then enter the message data
   */
 
 #include <Wire.h>
 #include <DFRobot_SIM.h>
 
-SoftwareSerial   mySerial(8,7);
+SoftwareSerial   mySerial(8,7);                            //RX TX
 DFSIM            sim;
 DFSIMSendMessage simSMS;
 
@@ -15,6 +16,7 @@ void setup(){
     Serial.begin(115200);
     sim.begin(mySerial);                                   //Set SoftwareSerial
     Serial.println("Send Short Message");
+    Serial.println("Check and init SIMcard......");
     bool Connected = false;
     while(!Connected){
         if(sim.init()){                                    //Check and init SIMcard

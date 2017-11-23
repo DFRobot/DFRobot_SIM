@@ -3,13 +3,18 @@
 
 #include "DFRobot_SIMcore.h"
 
+enum Protocol {
+    TCP    = 1,
+    UDP    = 2,
+};
+
 class DFRobot_SIMclient
 {
 public:
     int        checkSignalQuality(void);
     int        recive(char *buff ,int len);
     bool       init(void);
-    bool       connect(char *server,int port);
+    bool       connect(char *server,Protocol ptl,int port);
     bool       send(char *data);
     bool       send(void *buffer,size_t len);
     bool       close(void);

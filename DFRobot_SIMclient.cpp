@@ -54,19 +54,26 @@ bool   DFRobot_SIMclient::init(void)
     }
 }
 
-bool   DFRobot_SIMclient::connect(char *server,int port)
+bool   DFRobot_SIMclient::connect(char *server,Protocol ptl,int port)
 {
     if(SIMcore.getCommandCounter() == 2){
         char num[4];
         char serverIP[100];
         SIMcore.cleanBuffer(serverIP,100);
         itoa(port, num, 10);
-        SIMcore.send_cmd("AT+CIPSTART=\"TCP\",\"");
+        SIMcore.send_cmd("AT+CIPSTART=\"");
+        if(ptl == TCP){
+            SIMcore.send_cmd("TCP\",");
+        }else if(ptl == UDP){
+            SIMcore.send_cmd("UDP\",");
+        }else{
+            Serial.println("Wrong protocol");
+            return false;
+        }
         SIMcore.send_cmd(server);
         SIMcore.send_cmd("\",");
         SIMcore.send_cmd(num);
         SIMcore.send_cmd("\r\n");
-//        unsigned int timeout = millis();
         while(1){
             while(SIMcore.checkReadable()){
                 SIMcore.readBuffer(serverIP,100);
@@ -98,7 +105,6 @@ bool   DFRobot_SIMclient::send(char *data){
         SIMcore.send_cmd(num);
         if(SIMcore.check_send_cmd("\r\n",">")){
             SIMcore.send_cmd(data);
-//            unsigned int timeout = millis();
             while(1){
                 while(SIMcore.checkReadable()){
                     SIMcore.readBuffer(resp,20);

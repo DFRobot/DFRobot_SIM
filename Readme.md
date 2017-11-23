@@ -52,13 +52,14 @@ int checkSignalQuality(void);
  *
  * @param 
  *    *server Server domain name
+ *     ptl    Choose connection protocol Passible value: TCP UDP
  *     port   Contented port
  *
  * @return
  *     ture   Success
  *     false  Failed
  */
-bool connect(char *server,int port);
+bool connect(char *server,Protocol ptl,int port);
 
 /*
  * @brief Send data
