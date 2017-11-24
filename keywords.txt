@@ -25,22 +25,15 @@ connect	KEYWORD2
 send	KEYWORD2
 close	KEYWORD2
 getTime	KEYWORD2
-getPosition	KEYWORD2
-getLongitude	KEYWORD2
-getLatitude	KEYWORD2
 voiceCall	KEYWORD2
 hangCall	KEYWORD2
 beginSMS	KEYWORD2
 editSMS	KEYWORD2
 sendSMS	KEYWORD2
-getList	KEYWORD2
-createFile	KEYWORD2
-readFile	KEYWORD2
-deleteFile	KEYWORD2
-writeFile	KEYWORD2
-createFolder	KEYWORD2
-deleteFolder	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+Hex	LITERAL1
+Normal	LITERAL1

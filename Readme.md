@@ -17,13 +17,11 @@ The library use for GSM Shield as following function
 #### Send short message
 #### As a web client
 #### Get time
-#### Get current position    (L218)
-#### Independent file system (L218)
 
 ## Methods
 ```C++
 /*
- * @brief Set L218 software serial
+ * @brief Set software serial
  *
  * @Param
  *     &s_ SoftwareSerial
@@ -38,6 +36,14 @@ void begin(Stream &s_);
  *     false  Failed
  */
 bool init(void);
+
+/*
+ * @brief Get time
+ *
+ * @return
+ *     Current time
+ */
+char* getTime(void);
 
 /*
  * @brief Check signal quality
@@ -96,31 +102,6 @@ bool close(void);
 char* getTime(void);
 
 /*
- * @brief Get the current position
- *
- * @return
- *     ture   Success
- *     false  Failed
- */
-bool getPosition(void);
-
-/*
- * @brief Get longitude
- *
- * @return
- *     Longitude value
- */
-char* getLongitude(void);
-
-/*
- * @brief Get latitude
- *
- * @return
- *     Latitude value
- */
-char* getLatitude(void);
-
-/*
  * @brief Start a voice call
  * 
  * @param
@@ -172,92 +153,6 @@ bool sendSMS(void);
  * @return
  *     The list of all file
  */
-char* getList(void);
-
-/*
- * @brief Get specified folder's list
- *
- * @param 
- *    *foldername   The name of specified folder
- *
- * @return
- *     The list of specified folder
- */
-char* getList(char *foldername);
-
-/*
- * @brief Create a new file
- *
- * @param 
- *    *filename   The name of new file
- *
- * @return
- *     ture   Success
- *     false  Failed
- */
-bool createFile(char *filename);
-
-/*
- * @brief Create a new folder
- *
- * @param 
- *    *foldername   The name of new folder
- *
- * @return
- *     ture   Success
- *     false  Failed
- */
-bool createFolder(char *foldername);
-
-/*
- * @brief Read a file data
- *
- * @param 
- *     *filename   The name of specified file
- *      offset     Offset from the file beginning Passible value: 0-65536, default value: 0
- *      len        The length of data to be read Passible value: 0-1024, default value: 50
- *
- * @return
- *     The data of specified file
- */
-char* readFile(char *filename, int offset = 0, int len = 50);
-
-/*
- * @brief Delete specified file
- *
- * @param
- *    *filename   The name of specified file
- *
- * @return
- *     ture   Success
- *     false  Failed
- */
-bool deleteFile(char *filename);
-
-/*
- * @brief Delete specified folder
- *
- * @param
- *    *folder   The name of specified folder
- *
- * @return
- *     ture   Success
- *     false  Failed
- */
-bool deleteFolder(char *foldername);
-
-/*
- * @brief Write data to specified file
- *
- * @param
- *    *filename   The name of specified file
- *    *data       The input data
- *
- * @return
- *     ture   Success
- *     false  Failed
- */
-bool writeFile(char *filename, char *data);
 
 ```
 

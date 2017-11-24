@@ -63,9 +63,9 @@ bool   DFRobot_SIMclient::connect(char *server,Protocol ptl,int port)
         itoa(port, num, 10);
         SIMcore.send_cmd("AT+CIPSTART=\"");
         if(ptl == TCP){
-            SIMcore.send_cmd("TCP\",");
+            SIMcore.send_cmd("TCP\",\"");
         }else if(ptl == UDP){
-            SIMcore.send_cmd("UDP\",");
+            SIMcore.send_cmd("UDP\",\"");
         }else{
             Serial.println("Wrong protocol");
             return false;
