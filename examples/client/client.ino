@@ -8,13 +8,16 @@
 #include <Wire.h>
 #include <DFRobot_SIM.h>
 
-SoftwareSerial mySerial(8,7);                                //RX TX
+#define PIN_TX     7
+#define PIN_RX     8
+SoftwareSerial     mySerial(PIN_RX,PIN_TX);
 DFSIM            sim;
 DFSIMClient      simC;
 
 void setup(){
     int signalQuality;
     Serial.begin(115200);
+    delay(2000);
     sim.begin(mySerial);                                     //Set SoftwareSerial
     Serial.println("SIM Client");
     Serial.println("Check and init SIMcard......");
@@ -67,7 +70,9 @@ void loop(){
         Serial.println(sendData);
         if(simC.send(sendData)){                             //Send data to server
             Serial.println("Send data, recive:");
-            Serial.println(mySerial.read());                 //Get the recive data
+            while(mySerial.available()){
+                Serial.write(mySerial.read());               //Get the recive data
+            }
         }else{
             Serial.println("Failed to send");
         }

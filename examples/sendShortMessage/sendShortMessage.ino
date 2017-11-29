@@ -8,12 +8,15 @@
 #include <Wire.h>
 #include <DFRobot_SIM.h>
 
-SoftwareSerial   mySerial(8,7);                            //RX TX
+#define PIN_TX     7
+#define PIN_RX     8
+SoftwareSerial     mySerial(PIN_RX,PIN_TX);
 DFSIM            sim;
 DFSIMSendMessage simSMS;
 
 void setup(){
     Serial.begin(115200);
+    delay(2000);
     sim.begin(mySerial);                                   //Set SoftwareSerial
     Serial.println("Send Short Message");
     Serial.println("Check and init SIMcard......");
@@ -38,6 +41,7 @@ void loop(){
     readSerial(message);
     Serial.println("Message:");
     Serial.println(message);
+    Serial.println("Sending......");
     simSMS.beginSMS(phoneNum);                             //Input phone number
     simSMS.editSMS(message);                               //Input message content
     if(simSMS.sendSMS()){                                  //Send message

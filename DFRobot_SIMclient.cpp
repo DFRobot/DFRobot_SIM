@@ -136,11 +136,11 @@ bool   DFRobot_SIMclient::send(void *buffer,size_t len)
             if(SIMcore.check_send_cmd(buffer,"OK")){
                 return true;
             }else{
-                SIMcore.closeCommand();
+                SIMcore.setCommandCounter(3);
                 return false;
             }
         }else{
-            SIMcore.closeCommand();
+            SIMcore.setCommandCounter(3);
             return false;
         }
     }else{
@@ -148,28 +148,14 @@ bool   DFRobot_SIMclient::send(void *buffer,size_t len)
     }
 }
 
-int    DFRobot_SIMclient::recive(char *buff ,int len)
-{
-    char  SIMBuffer[len];
-    SIMcore.cleanBuffer(SIMBuffer, len);
-    int i = SIMcore.readBuffer(SIMBuffer, len);
-    memcpy(buff, SIMBuffer, i);
-    return i;
-}
-
 bool   DFRobot_SIMclient::close(void)
 {
     if(SIMcore.getCommandCounter() == 3){
-        if(SIMcore.check_send_cmd("AT+CIPCLOSE\r\n","OK")){
-            if(SIMcore.check_send_cmd("AT+CIPSHUT\r\n","OK")){
-                SIMcore.setCommandCounter(2);
-                return true;
-            }else{
-                SIMcore.closeCommand();
-                return false;
-            }
+        if(SIMcore.check_send_cmd("AT+CIPSHUT\r\n","OK")){
+            SIMcore.setCommandCounter(2);
+            return true;
         }else{
-            SIMcore.closeCommand();
+            SIMcore.setCommandCounter(2);
             return false;
         }
     }else{

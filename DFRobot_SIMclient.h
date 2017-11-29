@@ -12,7 +12,6 @@ class DFRobot_SIMclient
 {
 public:
     int        checkSignalQuality(void);
-    int        recive(char *buff ,int len);
     bool       init(void);
     bool       connect(char *server,Protocol ptl,int port);
     bool       send(char *data);

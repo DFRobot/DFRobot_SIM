@@ -38,15 +38,15 @@ public:
     int                    checkReadable(void);
     void                   sendCmd(const char* cmd);
     void                   cleanBuffer(char *buffer,int count);
+    void                   setRate(long rate);
     int                    readBuffer(char *buffer, int count, unsigned int timeout = DEFAULT_TIMEOUT, unsigned int chartimeout = DEFAULT_INTERCHAR_TIMEOUT);
     bool                   turnOFF(void);
     char*                  getTime(void);
-
+    long                   baudrate = 19200;
 private:
     char*                  phoneNumber;
     uint8_t                commandCounter;
     int                    port;
-    long                   baudrate = 38400;
     uint8_t                commandError;
     DFSIM_commandType_e    ongoingCommand;
 };
