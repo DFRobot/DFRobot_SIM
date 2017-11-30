@@ -1,5 +1,6 @@
 # DFROBOT_SIM Library for Arduino
 Provides an Arduino library for GSM Shield
+This is a base class library for AT communication module, many communicate device of DFRobot depend on it.
 
 ## Table of Contents
 

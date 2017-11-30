@@ -25,7 +25,7 @@ int    DFRobot_SIMclient::checkSignalQuality(void)
     }
 }
 
-bool   DFRobot_SIMclient::init(void)
+bool   DFRobot_SIMclient::initNet(void)
 {
     int  count = 0;
     while(count < 3){
