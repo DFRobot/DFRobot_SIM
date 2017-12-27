@@ -12,19 +12,8 @@ bool DFRobot_SIMcore::init(void)
 {
     int count = 0;
     delay(1000);
-    while(count < 3){
-        if(check_send_cmd("AT+IPR=19200\r\n","OK")){
-            break;
-        }else{
-            count++;
-            delay(300);
-        }
-    }
-    if(count == 3){
-        closeCommand();
-        return false;
-    }
     baudrate = 19200;
+    setRate(baudrate);
     while(count < 3){
         if(check_send_cmd("AT\r\n","OK")){
             break;
@@ -163,6 +152,11 @@ void DFRobot_SIMcore::send_cmd(const char* cmd)
     sendCmd(cmd);
 }
 
+void DFRobot_SIMcore::flushSerial(void)
+{
+    DFSIMSerial->flush();
+}
+
 int     DFRobot_SIMcore::checkReadable(void)
 {
     return DFSIMSerial->available();
@@ -170,8 +164,12 @@ int     DFRobot_SIMcore::checkReadable(void)
 
 void DFRobot_SIMcore::sendCmd(const char* cmd)
 {
-    DFSIMSerial->begin(baudrate);
     DFSIMSerial->write(cmd);
+}
+
+void DFRobot_SIMcore::send_buff(const char* buff,size_t num)
+{
+    DFSIMSerial->write(buff,num);
 }
 
 void DFRobot_SIMcore::setRate(long rate)
@@ -208,5 +206,6 @@ int     DFRobot_SIMcore::readBuffer(char *buffer, int count, unsigned int timeou
             break;
         }
     }
+    flushSerial();
     return i;
 }

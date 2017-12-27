@@ -37,7 +37,9 @@ public:
     void                   send_cmd(const char* cmd);
     int                    checkReadable(void);
     void                   sendCmd(const char* cmd);
+    void                   send_buff(const char* buff,size_t num);
     void                   cleanBuffer(char *buffer,int count);
+    void                   flushSerial(void);
     void                   setRate(long rate);
     int                    readBuffer(char *buffer, int count, unsigned int timeout = DEFAULT_TIMEOUT, unsigned int chartimeout = DEFAULT_INTERCHAR_TIMEOUT);
     bool                   turnOFF(void);
