@@ -1,7 +1,6 @@
 #include <DFRobot_SIMcore.h>
 
 static SoftwareSerial* DFSIMSerial;
-DFRobot_SIMcore   SIMcore;
 
 void DFRobot_SIMcore::begin(Stream &s_)
 {
@@ -170,6 +169,11 @@ void DFRobot_SIMcore::sendCmd(const char* cmd)
 void DFRobot_SIMcore::send_buff(const char* buff,size_t num)
 {
     DFSIMSerial->write(buff,num);
+}
+
+void DFRobot_SIMcore::send_String(String buff)
+{
+    DFSIMSerial->print(buff);
 }
 
 void DFRobot_SIMcore::setRate(long rate)

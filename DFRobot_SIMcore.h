@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <Wire.h>
 #include <stdio.h>
-#include <SoftwareSerial.h>
+#include "SoftwareSerial.h"
 #include <HardwareSerial.h>
 
 #define DEFAULT_TIMEOUT                 5    //seconds
@@ -38,6 +38,7 @@ public:
     int                    checkReadable(void);
     void                   sendCmd(const char* cmd);
     void                   send_buff(const char* buff,size_t num);
+    void                   send_String(String buff);
     void                   cleanBuffer(char *buffer,int count);
     void                   flushSerial(void);
     void                   setRate(long rate);
