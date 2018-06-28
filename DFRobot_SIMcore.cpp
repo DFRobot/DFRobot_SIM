@@ -176,6 +176,21 @@ void DFRobot_SIMcore::send_String(String buff)
     DFSIMSerial->print(buff);
 }
 
+String DFRobot_SIMcore::get_String(String buff)
+{
+    uint64_t t1 = millis();
+    while(1){
+        while(checkReadable()){
+            Serial.print(char(DFSIMSerial->read()));
+            t1 = millis();
+        }
+        //Serial.println();
+        if((millis() - t1) > 10000){
+            return buff;
+        }
+    }
+}
+
 void DFRobot_SIMcore::setRate(long rate)
 {
     DFSIMSerial->begin(rate);

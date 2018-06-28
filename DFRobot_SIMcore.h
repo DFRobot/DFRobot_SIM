@@ -39,6 +39,7 @@ public:
     void                   sendCmd(const char* cmd);
     void                   send_buff(const char* buff,size_t num);
     void                   send_String(String buff);
+    String                 get_String(String buff);
     void                   cleanBuffer(char *buffer,int count);
     void                   flushSerial(void);
     void                   setRate(long rate);
