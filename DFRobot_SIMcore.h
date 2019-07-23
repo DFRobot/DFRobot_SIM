@@ -33,7 +33,7 @@ public:
     DFSIM_commandType_e    getOngoingCommand();
     void                   openCommand(DFSIM_commandType_e c);
     void                   closeCommand(void);
-    bool                   check_send_cmd(const char* cmd, const char* resp);
+    bool                   check_send_cmd(const char* cmd, const char* resp,unsigned int timeout = DEFAULT_TIMEOUT, unsigned int chartimeout = DEFAULT_INTERCHAR_TIMEOUT);
     void                   send_cmd(const char* cmd);
     int                    checkReadable(void);
     void                   sendCmd(const char* cmd);

@@ -133,12 +133,12 @@ void DFRobot_SIMcore::closeCommand()
     setOngoingCommand(NONE);
 }
 
-bool DFRobot_SIMcore::check_send_cmd(const char* cmd, const char* resp)
+bool DFRobot_SIMcore::check_send_cmd(const char* cmd, const char* resp,unsigned int timeout = DEFAULT_TIMEOUT, unsigned int chartimeout = DEFAULT_INTERCHAR_TIMEOUT)
 {
     char SIMbuffer[100];
     cleanBuffer(SIMbuffer,100);
     sendCmd(cmd);
-    readBuffer(SIMbuffer,100);
+    readBuffer(SIMbuffer,100,timeout,chartimeout);
     if(NULL != strstr(SIMbuffer,resp)){
         return  true;
     }else{
